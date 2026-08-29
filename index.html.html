@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinthya Vasquez | Diseñadora Gráfica</title>
+    
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS (CDN para ejecutar sin Node.js) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'red-brand': '#df0139',
+                        'grey-brand': '#a5acaf',
+                        'lightBg': '#f8f8fa'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Estilos CSS Personalizados -->
+    <style>
+        body {
+            background-color: #FFFFFF;
+            color: #000000;
+            overflow-x: hidden;
+        }
+        
+        /* Animaciones personalizadas */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Input styles */
+        .input-editorial {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #a5acaf;
+            padding: 1rem 0;
+            background: transparent;
+            outline: none;
+            transition: border-color 0.3s;
+            font-size: 1rem;
+            color: #000000;
+        }
+        .input-editorial:focus {
+            border-bottom-color: #df0139;
+        }
+        .input-editorial::placeholder {
+            color: #a5acaf;
+        }
+        
+        /* Ocultar scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Estilos base de botones reutilizables (replicando el componente Button de React) */
+        .btn-base {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary { background-color: #000000; color: #FFFFFF; }
+        .btn-primary:hover { background-color: #df0139; color: #FFFFFF; }
+        
+        .btn-secondary { background-color: transparent; border: 2px solid #000000; color: #000000; }
+        .btn-secondary:hover { background-color: #000000; color: #FFFFFF; }
+        
+        .btn-red { background-color: #df0139; color: #FFFFFF; }
+        .btn-red:hover { background-color: #000000; color: #FFFFFF; }
+
+        .btn-icon { transition: transform 0.3s; }
+        .btn-base:hover .btn-icon { transform: translate(4px, -4px); }
+    </style>
+</head>
+<body class="antialiased selection:bg-red-brand selection:text-white">
+
+    <!-- HEADER -->
+    <header id="main-header" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent py-6">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#inicio" class="group nav-link">
+                <div class="font-serif font-bold text-2xl tracking-tighter flex items-center">
+                    C<span class="text-red-brand">V</span>
+                    <span class="ml-3 text-xs font-sans tracking-widest font-normal uppercase opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 hidden md:block">
+                        Cinthya Vasquez
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#inicio" class="nav-link text-xs font-semibold tracking-[0.2em] hover:text-red-brand transition-colors relative group">INICIO<span class="absolute -bottom-2 left-0 w-0 h-px bg-red-brand group-hover:w-full transition-all duration-300"></span></a>
+                <a href="#portafolio" class="nav-link text-xs font-semibold tracking-[0.2em] hover:text-red-brand transition-colors relative group">PORTAFOLIO<span class="absolute -bottom-2 left-0 w-0 h-px bg-red-brand group-hover:w-full transition-all duration-300"></span></a>
+                <a href="#servicios" class="nav-link text-xs font-semibold tracking-[0.2em] hover:text-red-brand transition-colors relative group">SERVICIOS<span class="absolute -bottom-2 left-0 w-0 h-px bg-red-brand group-hover:w-full transition-all duration-300"></span></a>
+                <a href="#contacto" class="nav-link text-xs font-semibold tracking-[0.2em] hover:text-red-brand transition-colors relative group">CONTACTO<span class="absolute -bottom-2 left-0 w-0 h-px bg-red-brand group-hover:w-full transition-all duration-300"></span></a>
+                <a href="https://wa.me/51917998121" target="_blank" rel="noopener noreferrer" class="btn-base btn-primary py-3 px-6 text-xs group">
+                    <span class="relative z-10 flex items-center gap-2">HABLEMOS <i data-lucide="arrow-up-right" class="w-4 h-4 btn-icon"></i></span>
+                </a>
+            </nav>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-black z-50 relative">
+                <i id="menu-icon" data-lucide="menu" class="w-7 h-7"></i>
+                <i id="close-icon" data-lucide="x" class="w-7 h-7 hidden"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 bg-white z-40 flex flex-col justify-center items-center transition-all duration-500 origin-top opacity-0 invisible scale-y-0">
+            <nav class="flex flex-col items-center gap-8 text-center">
+                <a href="#inicio" class="mobile-link font-serif text-4xl italic hover:text-red-brand transition-colors">INICIO</a>
+                <a href="#portafolio" class="mobile-link font-serif text-4xl italic hover:text-red-brand transition-colors">PORTAFOLIO</a>
+                <a href="#servicios" class="mobile-link font-serif text-4xl italic hover:text-red-brand transition-colors">SERVICIOS</a>
+                <a href="#contacto" class="mobile-link font-serif text-4xl italic hover:text-red-brand transition-colors">CONTACTO</a>
+                <a href="https://wa.me/51917998121" target="_blank" class="btn-base btn-red mt-8 group">
+                    <span class="relative z-10 flex items-center gap-2">HABLEMOS <i data-lucide="arrow-up-right" class="w-4 h-4 btn-icon"></i></span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section id="inicio" class="pt-32 pb-16 min-h-screen flex items-center bg-lightBg">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                    
+                    <div class="lg:col-span-7 order-2 lg:order-1">
+                        <div class="reveal flex gap-4 items-center mb-8 uppercase text-xs font-bold tracking-widest text-gray-500">
+                            <span>Diseñadora Gráfica</span>
+                            <span class="w-8 h-px bg-red-brand"></span>
+                            <span>Arequipa, Perú</span>
+                            <span class="w-8 h-px bg-red-brand"></span>
+                            <span>Portfolio 2026</span>
+                        </div>
+                        
+                        <div class="reveal" style="transition-delay: 100ms">
+                            <h1 class="text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.9] font-serif uppercase tracking-tighter mb-8">
+                                ¡Hola! <br />Soy <span class="italic font-light text-red-brand lowercase">Cinthya</span> <br />Vasquez
+                            </h1>
+                        </div>
+
+                        <div class="reveal max-w-xl space-y-6 text-gray-600 text-lg md:text-xl font-light leading-relaxed mb-10" style="transition-delay: 200ms">
+                            <p>Soy una diseñadora gráfica apasionada por la estética visual y la comunicación creativa.</p>
+                            <p>Me especializo en ilustración, branding y diseño digital, desarrollando piezas visuales que combinan creatividad, funcionalidad y claridad.</p>
+                            <p>Me motiva seguir aprendiendo, asumir nuevos retos y aportar soluciones visuales que conecten con las personas. ¡Gracias por visitar mi página!</p>
+                        </div>
+
+                        <div class="reveal flex flex-col sm:flex-row gap-4" style="transition-delay: 300ms">
+                            <a href="#portafolio" class="btn-base btn-primary group nav-link">
+                                <span class="relative z-10 flex items-center gap-2">VER PORTAFOLIO</span>
+                            </a>
+                            <a href="https://wa.me/51917998121" target="_blank" class="btn-base btn-secondary group">
+                                <span class="relative z-10 flex items-center gap-2">HABLEMOS <i data-lucide="arrow-up-right" class="w-4 h-4 btn-icon"></i></span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 order-1 lg:order-2">
+                        <div class="reveal relative w-full h-[60vh] lg:h-[80vh]" style="transition-delay: 200ms">
+                            <div class="absolute -top-4 -right-4 w-32 h-32 bg-red-brand z-0"></div>
+                            <div class="absolute -bottom-4 -left-4 w-48 h-48 border-2 border-black z-0"></div>
+                            <div class="relative z-10 w-full h-full shadow-2xl">
+                                <img src="https://drive.google.com/thumbnail?id=121Q1P8sATVOhmviDnTc3egDV2keYHzge&sz=w1000" alt="Cinthya Vasquez" class="w-full h-full object-cover" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SOBRE MI -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
+                    <div class="lg:col-span-5">
+                        <div class="reveal">
+                            <h2 class="text-4xl md:text-6xl font-serif uppercase tracking-tighter leading-none sticky top-32">
+                                Creatividad <br/><span class="text-red-brand italic font-light lowercase">con propósito</span>
+                            </h2>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-7 space-y-20">
+                        <div class="reveal" style="transition-delay: 100ms">
+                            <h3 class="text-sm font-bold tracking-[0.3em] uppercase text-gray-400 mb-8 pb-4 border-b border-gray-200">Educación</h3>
+                            <div class="space-y-12">
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <div class="md:col-span-1 text-red-brand font-bold font-serif text-xl">2024 — 2025</div>
+                                    <div class="md:col-span-3">
+                                        <h4 class="text-2xl font-serif mb-2">Diseño Gráfico Digital Publicitario</h4>
+                                        <p class="text-gray-500 uppercase text-sm tracking-widest">InfoUNSA | Arequipa, Perú</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <div class="md:col-span-1 text-red-brand font-bold font-serif text-xl"></div>
+                                    <div class="md:col-span-3">
+                                        <h4 class="text-2xl font-serif mb-2">Dash Design Conferencia</h4>
+                                        <p class="text-gray-500 uppercase text-sm tracking-widest">Creative People | Arequipa, Perú</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <div class="md:col-span-1 text-red-brand font-bold font-serif text-xl">2026 — 2027</div>
+                                    <div class="md:col-span-3">
+                                        <h4 class="text-2xl font-serif mb-2">Marketing Digital</h4>
+                                        <p class="text-gray-500 uppercase text-sm tracking-widest">InfoUNSA | Arequipa, Perú</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="reveal" style="transition-delay: 200ms">
+                            <h3 class="text-sm font-bold tracking-[0.3em] uppercase text-gray-400 mb-8 pb-4 border-b border-gray-200">Experiencia</h3>
+                            <div class="space-y-12">
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <div class="md:col-span-1 text-black font-bold font-serif text-xl">2025 — Actual</div>
+                                    <div class="md:col-span-3">
+                                        <h4 class="text-2xl font-serif mb-2">Diseñadora Gráfica</h4>
+                                        <p class="text-gray-500 uppercase text-sm tracking-widest">Fotografía D'Marco | Arequipa, Perú</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <h3 class="text-sm font-bold tracking-[0.3em] uppercase text-gray-400 mb-12 text-center md:text-left">Áreas de Especialidad</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Tarjeta 1 -->
+                    <div class="reveal bg-lightBg p-10 border border-gray-100 hover:border-black transition-colors duration-500 group" style="transition-delay: 0ms">
+                        <div class="text-6xl font-serif text-red-brand mb-6">01</div>
+                        <h4 class="text-xl font-bold uppercase tracking-wide mb-6 h-14">Branding e Identidad Visual</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-gray-600"><span class="text-red-brand mr-2 mt-1">✦</span><span class="font-light">Diseño de logotipos</span></li>
+                            <li class="flex items-start text-gray-600"><span class="text-red-brand mr-2 mt-1">✦</span><span class="font-light">Desarrollo de identidad visual</span></li>
+                            <li class="flex items-start text-gray-600"><span class="text-red-brand mr-2 mt-1">✦</span><span class="font-light">Conceptos de marca</span></li>
+                            <li class="flex items-start text-gray-600"><span class="text-red-brand mr-2 mt-1">✦</span><span class="font-light">Piezas gráficas para branding</span></li>
+                        </ul>
+                    </div>
+                    <!-- Tarjeta 2 -->
+                    <div class="reveal bg-lightBg p-10 border border-gray-100 hover:border-black transition-colors duration-500 group" style="transition-delay: 150ms">
+                        <div class="text-6xl font-serif text-red-brand mb-6">02</div>
+                        <h4 class="text-xl font-bold uppercase tracking-wide mb-6 h-14">Diseño Digital</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-gray-600"><span class="text-red-brand mr-2 mt-1">✦</span><span class="font-light">Diseño para redes sociales</span></li>
+                            <li class="flex items-start text-gray-600"><span class="text-red-brand mr-2 mt-1">✦</span><span class="font-light">Piezas publicitarias</span></li>
+                            <li class="flex items-start text-gray-600"><span class="text-red-brand mr-2 mt-1">✦</span><span class="font-light">Ilustración digital</span></li>
+                        </ul>
+                    </div>
+                    <!-- Tarjeta 3 -->
+                    <div class="reveal bg-lightBg p-10 border border-gray-100 hover:border-black transition-colors duration-500 group" style="transition-delay: 300ms">
+                        <div class="text-6xl font-serif text-red-brand mb-6">03</div>
+                        <h4 class="text-xl font-bold uppercase tracking-wide mb-6 h-14">Diseño Editorial</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-gray-600"><span class="text-red-brand mr-2 mt-1">✦</span><span class="font-light">Maquetación de piezas gráficas</span></li>
+                            <li class="flex items-start text-gray-600"><span class="text-red-brand mr-2 mt-1">✦</span><span class="font-light">Composición tipográfica</span></li>
+                            <li class="flex items-start text-gray-600"><span class="text-red-brand mr-2 mt-1">✦</span><span class="font-light">Diseño de material visual</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOFTWARE -->
+        <section class="py-24 bg-black text-white">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    
+                    <div class="reveal">
+                        <h2 class="text-5xl md:text-7xl font-serif uppercase tracking-tighter leading-[0.9]">
+                            Herramientas <br/>
+                            <span class="italic font-light lowercase text-red-brand">que forman parte</span> <br/>
+                            de mi proceso
+                        </h2>
+                    </div>
+
+                    <div class="space-y-8" id="software-list">
+                        <!-- Generados por HTML -->
+                        <div class="reveal flex flex-col gap-2" style="transition-delay: 0ms">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 border border-gray-700 flex items-center justify-center font-serif font-bold text-lg rounded-sm bg-gray-900">Ai</div>
+                                    <span class="uppercase tracking-widest text-sm font-semibold">Illustrator</span>
+                                </div>
+                                <span class="font-serif text-gray-400">90%</span>
+                            </div>
+                            <div class="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-red-brand transition-all duration-[1500ms] ease-out rounded-full w-0" data-percent="90"></div>
+                            </div>
+                        </div>
+
+                        <div class="reveal flex flex-col gap-2" style="transition-delay: 100ms">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 border border-gray-700 flex items-center justify-center font-serif font-bold text-lg rounded-sm bg-gray-900">Ps</div>
+                                    <span class="uppercase tracking-widest text-sm font-semibold">Photoshop</span>
+                                </div>
+                                <span class="font-serif text-gray-400">95%</span>
+                            </div>
+                            <div class="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-red-brand transition-all duration-[1500ms] ease-out rounded-full w-0" data-percent="95"></div>
+                            </div>
+                        </div>
+
+                        <div class="reveal flex flex-col gap-2" style="transition-delay: 200ms">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 border border-gray-700 flex items-center justify-center font-serif font-bold text-lg rounded-sm bg-gray-900">Id</div>
+                                    <span class="uppercase tracking-widest text-sm font-semibold">InDesign</span>
+                                </div>
+                                <span class="font-serif text-gray-400">85%</span>
+                            </div>
+                            <div class="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-red-brand transition-all duration-[1500ms] ease-out rounded-full w-0" data-percent="85"></div>
+                            </div>
+                        </div>
+
+                        <div class="reveal flex flex-col gap-2" style="transition-delay: 300ms">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 border border-gray-700 flex items-center justify-center font-serif font-bold text-lg rounded-sm bg-gray-900">CD</div>
+                                    <span class="uppercase tracking-widest text-sm font-semibold">CorelDRAW</span>
+                                </div>
+                                <span class="font-serif text-gray-400">80%</span>
+                            </div>
+                            <div class="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-red-brand transition-all duration-[1500ms] ease-out rounded-full w-0" data-percent="80"></div>
+                            </div>
+                        </div>
+
+                        <div class="reveal flex flex-col gap-2" style="transition-delay: 400ms">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 border border-gray-700 flex items-center justify-center font-serif font-bold text-lg rounded-sm bg-gray-900">SU</div>
+                                    <span class="uppercase tracking-widest text-sm font-semibold">SketchUp</span>
+                                </div>
+                                <span class="font-serif text-gray-400">50%</span>
+                            </div>
+                            <div class="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-red-brand transition-all duration-[1500ms] ease-out rounded-full w-0" data-percent="50"></div>
+                            </div>
+                        </div>
+
+                        <div class="reveal flex flex-col gap-2" style="transition-delay: 500ms">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 border border-gray-700 flex items-center justify-center font-serif font-bold text-lg rounded-sm bg-gray-900">Of</div>
+                                    <span class="uppercase tracking-widest text-sm font-semibold">Office</span>
+                                </div>
+                                <span class="font-serif text-gray-400">80%</span>
+                            </div>
+                            <div class="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-red-brand transition-all duration-[1500ms] ease-out rounded-full w-0" data-percent="80"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTAFOLIO -->
+        <section id="portafolio" class="py-32 bg-lightBg">
+            <div class="container mx-auto px-6 md:px-12">
+                
+                <div class="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
+                    <div class="reveal max-w-3xl">
+                        <h2 class="text-5xl md:text-7xl font-serif uppercase tracking-tighter leading-none mb-6">
+                            Ideas convertidas <br/>
+                            <span class="italic font-light lowercase text-red-brand">en experiencias</span> visuales
+                        </h2>
+                        <p class="text-xl font-light text-gray-600 max-w-xl">
+                            Una selección de proyectos de diseño gráfico, branding, contenido digital y marketing desarrollados para comunicar, conectar y destacar.
+                        </p>
+                    </div>
+                    <div class="reveal" style="transition-delay: 200ms">
+                        <a href="https://www.behance.net/cinthyavasquez2" target="_blank" class="btn-base btn-secondary group">
+                            <span class="relative z-10 flex items-center gap-2">VER BEHANCE <i data-lucide="arrow-up-right" class="w-4 h-4 btn-icon"></i></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-16 md:gap-32">
+                    
+                    <!-- Proyecto 01 -->
+                    <div class="reveal group cursor-pointer" onclick="window.open('https://www.behance.net/cinthyavasquez2', '_blank')">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="lg:col-span-8 overflow-hidden relative">
+                                <img src="https://drive.google.com/thumbnail?id=1fbYWfe9dKPGPevN0wuxmbDlQOsO6M0BH&sz=w1000" alt="Proyecto Branding" class="w-full h-[50vh] md:h-[70vh] object-cover" />
+                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500 z-20 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-red-brand rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 transition-all duration-300">
+                                        <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-4 lg:pl-8">
+                                <p class="text-red-brand font-bold uppercase tracking-widest text-xs mb-4">Proyecto 01 / Branding</p>
+                                <h3 class="text-4xl font-serif uppercase mb-2 group-hover:text-red-brand transition-colors">Identidad Visual</h3>
+                                <p class="text-gray-500 font-light">Diseño de marca, papelería corporativa y guidelines.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 02 -->
+                    <div class="reveal group cursor-pointer" onclick="window.open('https://www.behance.net/cinthyavasquez2', '_blank')">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="lg:col-span-4 lg:col-start-2 order-2 lg:order-1 text-left lg:text-right lg:pr-8">
+                                <p class="text-red-brand font-bold uppercase tracking-widest text-xs mb-4">Proyecto 02 / Editorial</p>
+                                <h3 class="text-4xl font-serif uppercase mb-2 group-hover:text-red-brand transition-colors">Diseño y Maquetación</h3>
+                                <p class="text-gray-500 font-light">Composición tipográfica y estructuración visual para medios impresos.</p>
+                            </div>
+                            <div class="lg:col-span-7 order-1 lg:order-2 overflow-hidden relative">
+                                <img src="https://drive.google.com/thumbnail?id=161CmIdmPjGRywBBP0F0VJxjx54mntgXo&sz=w1000" alt="Proyecto Editorial" class="w-full h-[50vh] md:h-[60vh] object-cover" />
+                                 <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500 z-20 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-red-brand rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 transition-all duration-300">
+                                        <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 03 -->
+                    <div class="reveal group cursor-pointer" onclick="window.open('https://www.behance.net/cinthyavasquez2', '_blank')">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="lg:col-span-10 lg:col-start-2 overflow-hidden relative">
+                                <img src="https://drive.google.com/thumbnail?id=1kQelmlt4UsITRhI-tAyzo_GtBCM6hCeU&sz=w1000" alt="Proyecto Digital" class="w-full h-[50vh] md:h-[60vh] object-cover" />
+                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500 z-20 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-red-brand rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 transition-all duration-300">
+                                        <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-10 lg:col-start-2 text-center mt-6">
+                                <p class="text-red-brand font-bold uppercase tracking-widest text-xs mb-4">Proyecto 03 / Diseño Digital</p>
+                                <h3 class="text-4xl font-serif uppercase mb-2 group-hover:text-red-brand transition-colors">Social Media / Campaign</h3>
+                                <p class="text-gray-500 font-light">Estrategia visual y creación de contenido para plataformas digitales.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA PORTAFOLIO -->
+        <section class="bg-red-brand py-32 text-center text-white">
+            <div class="container mx-auto px-6">
+                <div class="reveal">
+                    <h2 class="text-6xl md:text-8xl lg:text-[8rem] font-serif uppercase tracking-tighter leading-none mb-12">
+                        ¿Te gusta <br/>
+                        <span class="italic font-light lowercase text-black">mi trabajo?</span><br/>
+                        Creemos <br/>algo juntos
+                    </h2>
+                    <div class="flex flex-col sm:flex-row justify-center gap-6">
+                        <a href="https://wa.me/51917998121" target="_blank" class="btn-base btn-primary group">
+                            <span class="relative z-10 flex items-center gap-2">HABLEMOS POR WHATSAPP <i data-lucide="arrow-up-right" class="w-4 h-4 btn-icon"></i></span>
+                        </a>
+                        <a href="https://www.behance.net/cinthyavasquez2" target="_blank" class="btn-base btn-secondary border-white text-white hover:bg-white hover:text-black group">
+                            <span class="relative z-10 flex items-center gap-2">VER MÁS EN BEHANCE <i data-lucide="arrow-up-right" class="w-4 h-4 btn-icon"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICIOS -->
+        <section id="servicios" class="py-32 bg-white">
+            <div class="container mx-auto px-6 md:px-12">
+                
+                <div class="reveal mb-24 max-w-4xl">
+                    <h2 class="text-5xl md:text-7xl font-serif uppercase tracking-tighter leading-none mb-8">
+                        Diseño que destaca<br/>
+                        <span class="italic font-light text-red-brand lowercase">Estrategias que</span> conectan
+                    </h2>
+                    <p class="text-xl font-light text-gray-600 mb-10 max-w-2xl">
+                        Creo soluciones creativas de diseño gráfico y marketing digital pensadas para construir marcas, comunicar mejor y conectar con el público adecuado.
+                    </p>
+                    <a href="https://wa.me/51917998121" target="_blank" class="btn-base btn-primary group">
+                        <span class="relative z-10 flex items-center gap-2">CUÉNTAME TU PROYECTO <i data-lucide="arrow-up-right" class="w-4 h-4 btn-icon"></i></span>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                    <!-- Diseño Gráfico -->
+                    <div class="reveal">
+                        <h3 class="text-2xl font-serif italic mb-10 border-b-2 border-black pb-4 inline-block">Diseño Gráfico</h3>
+                        <div class="flex flex-col">
+                            <!-- DG1 -->
+                            <div class="group border-b border-gray-200 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-gray-50 transition-colors px-4 -mx-4">
+                                <div class="flex items-start md:items-center gap-6 md:w-1/2">
+                                    <span class="font-serif text-xl text-gray-300 group-hover:text-red-brand transition-colors">01</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-red-brand transition-colors">Diseño de Logotipo</h4>
+                                        <p class="text-gray-500 font-light text-sm">Creación del identificador principal de tu marca.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-end md:w-1/2 gap-8 pl-12 md:pl-0">
+                                    <div class="text-right">
+                                        <p class="font-serif text-lg">Desde S/ 150</p>
+                                        <p class="text-xs text-gray-400">Desde US$ 45</p>
+                                    </div>
+                                    <a href="https://wa.me/51917998121?text=Hola%20Cinthya%2C%20me%20interesa%20cotizar%20el%20servicio%20de%20Dise%C3%B1o%20de%20Logotipo." target="_blank" class="btn-base btn-secondary px-6 py-2 text-xs hover:border-red-brand hover:bg-red-brand">COTIZAR</a>
+                                </div>
+                            </div>
+                            <!-- DG2 -->
+                            <div class="group border-b border-gray-200 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-gray-50 transition-colors px-4 -mx-4">
+                                <div class="flex items-start md:items-center gap-6 md:w-1/2">
+                                    <span class="font-serif text-xl text-gray-300 group-hover:text-red-brand transition-colors">02</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-red-brand transition-colors">Identidad Visual</h4>
+                                        <p class="text-gray-500 font-light text-sm">Manual de marca, paleta de colores, tipografía y papelería.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-end md:w-1/2 gap-8 pl-12 md:pl-0">
+                                    <div class="text-right">
+                                        <p class="font-serif text-lg">Desde S/ 350</p>
+                                        <p class="text-xs text-gray-400">Desde US$ 100</p>
+                                    </div>
+                                    <a href="https://wa.me/51917998121?text=Hola%20Cinthya%2C%20me%20interesa%20cotizar%20el%20servicio%20de%20Identidad%20Visual." target="_blank" class="btn-base btn-secondary px-6 py-2 text-xs hover:border-red-brand hover:bg-red-brand">COTIZAR</a>
+                                </div>
+                            </div>
+                            <!-- DG3 -->
+                            <div class="group border-b border-gray-200 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-gray-50 transition-colors px-4 -mx-4">
+                                <div class="flex items-start md:items-center gap-6 md:w-1/2">
+                                    <span class="font-serif text-xl text-gray-300 group-hover:text-red-brand transition-colors">03</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-red-brand transition-colors">Flyer / Pieza Publicitaria</h4>
+                                        <p class="text-gray-500 font-light text-sm">Diseño de alto impacto para impresión o digital.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-end md:w-1/2 gap-8 pl-12 md:pl-0">
+                                    <div class="text-right">
+                                        <p class="font-serif text-lg">Desde S/ 50</p>
+                                        <p class="text-xs text-gray-400">Desde US$ 15</p>
+                                    </div>
+                                    <a href="https://wa.me/51917998121?text=Hola%20Cinthya%2C%20me%20interesa%20cotizar%20el%20servicio%20de%20Flyer%20%2F%20Pieza%20Publicitaria." target="_blank" class="btn-base btn-secondary px-6 py-2 text-xs hover:border-red-brand hover:bg-red-brand">COTIZAR</a>
+                                </div>
+                            </div>
+                            <!-- DG4 -->
+                            <div class="group border-b border-gray-200 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-gray-50 transition-colors px-4 -mx-4">
+                                <div class="flex items-start md:items-center gap-6 md:w-1/2">
+                                    <span class="font-serif text-xl text-gray-300 group-hover:text-red-brand transition-colors">04</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-red-brand transition-colors">Pack de 5 Diseños Redes</h4>
+                                        <p class="text-gray-500 font-light text-sm">Plantillas o posts finales para Instagram/Facebook.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-end md:w-1/2 gap-8 pl-12 md:pl-0">
+                                    <div class="text-right">
+                                        <p class="font-serif text-lg">Desde S/ 120</p>
+                                        <p class="text-xs text-gray-400">Desde US$ 35</p>
+                                    </div>
+                                    <a href="https://wa.me/51917998121?text=Hola%20Cinthya%2C%20me%20interesa%20cotizar%20el%20servicio%20de%20Pack%20de%205%20Dise%C3%B1os%20Redes." target="_blank" class="btn-base btn-secondary px-6 py-2 text-xs hover:border-red-brand hover:bg-red-brand">COTIZAR</a>
+                                </div>
+                            </div>
+                            <!-- DG5 -->
+                            <div class="group border-b border-gray-200 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-gray-50 transition-colors px-4 -mx-4">
+                                <div class="flex items-start md:items-center gap-6 md:w-1/2">
+                                    <span class="font-serif text-xl text-gray-300 group-hover:text-red-brand transition-colors">05</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-red-brand transition-colors">Diseño Editorial</h4>
+                                        <p class="text-gray-500 font-light text-sm">Maquetación de revistas, catálogos, e-books.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-end md:w-1/2 gap-8 pl-12 md:pl-0">
+                                    <div class="text-right">
+                                        <p class="font-serif text-lg">Desde S/ 180</p>
+                                        <p class="text-xs text-gray-400">Desde US$ 50</p>
+                                    </div>
+                                    <a href="https://wa.me/51917998121?text=Hola%20Cinthya%2C%20me%20interesa%20cotizar%20el%20servicio%20de%20Dise%C3%B1o%20Editorial." target="_blank" class="btn-base btn-secondary px-6 py-2 text-xs hover:border-red-brand hover:bg-red-brand">COTIZAR</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marketing Digital -->
+                    <div class="reveal" style="transition-delay: 200ms">
+                        <h3 class="text-2xl font-serif italic mb-10 border-b-2 border-black pb-4 inline-block">Marketing Digital</h3>
+                        <div class="flex flex-col">
+                            <!-- MD1 -->
+                            <div class="group border-b border-gray-200 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-gray-50 transition-colors px-4 -mx-4">
+                                <div class="flex items-start md:items-center gap-6 md:w-1/2">
+                                    <span class="font-serif text-xl text-gray-300 group-hover:text-red-brand transition-colors">01</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-red-brand transition-colors">Estrategia de Contenidos</h4>
+                                        <p class="text-gray-500 font-light text-sm">Planificación de pilares y objetivos de comunicación.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-end md:w-1/2 gap-8 pl-12 md:pl-0">
+                                    <div class="text-right">
+                                        <p class="font-serif text-lg">Desde S/ 250</p>
+                                        <p class="text-xs text-gray-400">Desde US$ 70</p>
+                                    </div>
+                                    <a href="https://wa.me/51917998121?text=Hola%20Cinthya%2C%20me%20interesa%20cotizar%20el%20servicio%20de%20Estrategia%20de%20Contenidos." target="_blank" class="btn-base btn-secondary px-6 py-2 text-xs hover:border-red-brand hover:bg-red-brand">COTIZAR</a>
+                                </div>
+                            </div>
+                            <!-- MD2 -->
+                            <div class="group border-b border-gray-200 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-gray-50 transition-colors px-4 -mx-4">
+                                <div class="flex items-start md:items-center gap-6 md:w-1/2">
+                                    <span class="font-serif text-xl text-gray-300 group-hover:text-red-brand transition-colors">02</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-red-brand transition-colors">Plan de Contenido Mensual</h4>
+                                        <p class="text-gray-500 font-light text-sm">Grilla mensual con copys y formatos definados.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-end md:w-1/2 gap-8 pl-12 md:pl-0">
+                                    <div class="text-right">
+                                        <p class="font-serif text-lg">Desde S/ 300</p>
+                                        <p class="text-xs text-gray-400">Desde US$ 85</p>
+                                    </div>
+                                    <a href="https://wa.me/51917998121?text=Hola%20Cinthya%2C%20me%20interesa%20cotizar%20el%20servicio%20de%20Plan%20de%20Contenido%20Mensual." target="_blank" class="btn-base btn-secondary px-6 py-2 text-xs hover:border-red-brand hover:bg-red-brand">COTIZAR</a>
+                                </div>
+                            </div>
+                            <!-- MD3 -->
+                            <div class="group border-b border-gray-200 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-gray-50 transition-colors px-4 -mx-4">
+                                <div class="flex items-start md:items-center gap-6 md:w-1/2">
+                                    <span class="font-serif text-xl text-gray-300 group-hover:text-red-brand transition-colors">03</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-red-brand transition-colors">Gestión de Redes Sociales</h4>
+                                        <p class="text-gray-500 font-light text-sm">Administración completa, publicación y métricas.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-end md:w-1/2 gap-8 pl-12 md:pl-0">
+                                    <div class="text-right">
+                                        <p class="font-serif text-lg">Desde S/ 450</p>
+                                        <p class="text-xs text-gray-400">Desde US$ 125</p>
+                                    </div>
+                                    <a href="https://wa.me/51917998121?text=Hola%20Cinthya%2C%20me%20interesa%20cotizar%20el%20servicio%20de%20Gesti%C3%B3n%20de%20Redes%20Sociales." target="_blank" class="btn-base btn-secondary px-6 py-2 text-xs hover:border-red-brand hover:bg-red-brand">COTIZAR</a>
+                                </div>
+                            </div>
+                            <!-- MD4 -->
+                            <div class="group border-b border-gray-200 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-gray-50 transition-colors px-4 -mx-4">
+                                <div class="flex items-start md:items-center gap-6 md:w-1/2">
+                                    <span class="font-serif text-xl text-gray-300 group-hover:text-red-brand transition-colors">04</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-red-brand transition-colors">Meta Ads</h4>
+                                        <p class="text-gray-500 font-light text-sm">Creación y optimización de campañas de pago.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-end md:w-1/2 gap-8 pl-12 md:pl-0">
+                                    <div class="text-right">
+                                        <p class="font-serif text-lg">Desde S/ 350</p>
+                                        <p class="text-xs text-gray-400">Desde US$ 100</p>
+                                    </div>
+                                    <a href="https://wa.me/51917998121?text=Hola%20Cinthya%2C%20me%20interesa%20cotizar%20el%20servicio%20de%20Meta%20Ads." target="_blank" class="btn-base btn-secondary px-6 py-2 text-xs hover:border-red-brand hover:bg-red-brand">COTIZAR</a>
+                                </div>
+                            </div>
+                            <!-- MD5 -->
+                            <div class="group border-b border-gray-200 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-gray-50 transition-colors px-4 -mx-4">
+                                <div class="flex items-start md:items-center gap-6 md:w-1/2">
+                                    <span class="font-serif text-xl text-gray-300 group-hover:text-red-brand transition-colors">05</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-red-brand transition-colors">Auditoría Digital</h4>
+                                        <p class="text-gray-500 font-light text-sm">Análisis del estado actual de tu marca online.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between md:justify-end md:w-1/2 gap-8 pl-12 md:pl-0">
+                                    <div class="text-right">
+                                        <p class="font-serif text-lg">Desde S/ 180</p>
+                                        <p class="text-xs text-gray-400">Desde US$ 50</p>
+                                    </div>
+                                    <a href="https://wa.me/51917998121?text=Hola%20Cinthya%2C%20me%20interesa%20cotizar%20el%20servicio%20de%20Auditor%C3%ADa%20Digital." target="_blank" class="btn-base btn-secondary px-6 py-2 text-xs hover:border-red-brand hover:bg-red-brand">COTIZAR</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal mt-12 text-center lg:text-left">
+                    <p class="text-sm text-gray-400 font-light">* Los precios son referenciales y pueden variar según el alcance específico de cada proyecto.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACTO -->
+        <section id="contacto" class="bg-lightBg py-32">
+            <div class="container mx-auto px-6 md:px-12">
+                
+                <div class="reveal mb-20 text-center">
+                    <h2 class="text-6xl md:text-8xl font-serif uppercase tracking-tighter leading-none mb-6">
+                        Hablemos <br/>
+                        <span class="italic font-light text-red-brand lowercase">de tu próximo</span><br/>
+                        proyecto
+                    </h2>
+                    <p class="text-xl font-light text-gray-600 max-w-2xl mx-auto">
+                        ¿Tienes una idea, una marca o un proyecto en mente? Cuéntame brevemente qué necesitas y conversemos sobre cómo podemos trabajarlo juntos.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 max-w-6xl mx-auto bg-white p-10 md:p-16 shadow-sm border border-gray-100">
+                    
+                    <!-- Formulario -->
+                    <div class="reveal">
+                        <h3 class="text-3xl font-serif uppercase mb-10">Cuéntame sobre tu proyecto</h3>
+                        <form id="contactForm" class="space-y-8">
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">Nombre</label>
+                                <input type="text" id="name" name="name" placeholder="Tu nombre" class="input-editorial" />
+                            </div>
+                            
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">Medio de contacto</label>
+                                <input type="text" id="contact" name="contact" placeholder="Correo electrónico o WhatsApp" class="input-editorial" />
+                            </div>
+
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">Servicio de interés</label>
+                                <select id="service" name="service" class="input-editorial appearance-none rounded-none bg-transparent cursor-pointer">
+                                    <option value="" disabled selected>Selecciona una opción</option>
+                                    <option value="Diseño gráfico">Diseño gráfico general</option>
+                                    <option value="Branding">Branding / Identidad Visual</option>
+                                    <option value="Social Media">Social Media</option>
+                                    <option value="Marketing Digital">Marketing Digital</option>
+                                    <option value="Meta Ads">Meta Ads</option>
+                                    <option value="Otro">Otro proyecto</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">Detalles del proyecto</label>
+                                <textarea id="message" name="message" placeholder="Cuéntame brevemente qué necesitas..." rows="4" class="input-editorial resize-none"></textarea>
+                            </div>
+
+                            <p id="errorMsg" class="text-red-brand text-sm"></p>
+                            
+                            <button type="submit" id="submitBtn" class="btn-base btn-primary w-full group">
+                                <span class="relative z-10 flex items-center gap-2">ENVIAR PROYECTO</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contacto Directo -->
+                    <div class="reveal lg:border-l lg:border-gray-200 lg:pl-16 flex flex-col justify-center" style="transition-delay: 200ms">
+                        <h3 class="text-3xl font-serif uppercase mb-10">¿Prefieres contactarme directamente?</h3>
+                        <div class="space-y-6">
+                            <a href="https://wa.me/51917998121" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between pb-6 border-b border-gray-100 hover:border-black transition-colors">
+                                <div>
+                                    <h4 class="text-xl font-bold uppercase tracking-wide group-hover:text-red-brand transition-colors">WhatsApp</h4>
+                                    <p class="text-gray-500 font-light">Conversemos</p>
+                                </div>
+                                <i data-lucide="arrow-up-right" class="text-gray-300 group-hover:text-black transition-colors"></i>
+                            </a>
+                            <a href="https://www.instagram.com/oliver.vc2309/" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between pb-6 border-b border-gray-100 hover:border-black transition-colors">
+                                <div>
+                                    <h4 class="text-xl font-bold uppercase tracking-wide group-hover:text-red-brand transition-colors">Instagram</h4>
+                                    <p class="text-gray-500 font-light">@oliver.vc2309</p>
+                                </div>
+                                <i data-lucide="arrow-up-right" class="text-gray-300 group-hover:text-black transition-colors"></i>
+                            </a>
+                            <a href="https://www.behance.net/cinthyavasquez2" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between pb-6 border-b border-gray-100 hover:border-black transition-colors">
+                                <div>
+                                    <h4 class="text-xl font-bold uppercase tracking-wide group-hover:text-red-brand transition-colors">Behance</h4>
+                                    <p class="text-gray-500 font-light">Ver mi trabajo</p>
+                                </div>
+                                <i data-lucide="arrow-up-right" class="text-gray-300 group-hover:text-black transition-colors"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/cinthya-vc-10474b281/" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between pb-6 border-b border-gray-100 hover:border-black transition-colors">
+                                <div>
+                                    <h4 class="text-xl font-bold uppercase tracking-wide group-hover:text-red-brand transition-colors">LinkedIn</h4>
+                                    <p class="text-gray-500 font-light">Conectemos</p>
+                                </div>
+                                <i data-lucide="arrow-up-right" class="text-gray-300 group-hover:text-black transition-colors"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA FINAL -->
+        <section class="bg-red-brand py-32 text-center text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-black to-transparent"></div>
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="reveal">
+                    <h2 class="text-5xl md:text-7xl lg:text-[7rem] font-serif uppercase tracking-tighter leading-none mb-12">
+                        Una buena idea <br/>
+                        puede empezar con <br/>
+                        <span class="italic font-light lowercase text-black block mt-4">un simple hola</span>
+                    </h2>
+                    <a href="https://wa.me/51917998121" target="_blank" class="btn-base btn-primary bg-black hover:bg-white hover:text-black shadow-2xl group">
+                        <span class="relative z-10 flex items-center gap-2">HABLEMOS <i data-lucide="arrow-up-right" class="w-4 h-4 btn-icon"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-white py-16">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-gray-800 pb-12 mb-8">
+                
+                <div>
+                    <div class="font-serif font-bold text-2xl tracking-tighter mb-4">
+                        C<span class="text-red-brand">V</span>
+                    </div>
+                    <p class="uppercase tracking-widest text-sm font-semibold mb-1">Cinthya Vasquez</p>
+                    <p class="text-gray-500 font-light text-sm mb-1">Diseñadora Gráfica</p>
+                    <p class="text-gray-500 font-light text-sm">Arequipa, Perú</p>
+                </div>
+
+                <div class="flex flex-col gap-4 text-center md:text-left">
+                    <a href="#inicio" class="text-gray-400 hover:text-white uppercase tracking-widest text-xs transition-colors nav-link">Inicio</a>
+                    <a href="#portafolio" class="text-gray-400 hover:text-white uppercase tracking-widest text-xs transition-colors nav-link">Portafolio</a>
+                    <a href="#servicios" class="text-gray-400 hover:text-white uppercase tracking-widest text-xs transition-colors nav-link">Servicios</a>
+                    <a href="#contacto" class="text-gray-400 hover:text-white uppercase tracking-widest text-xs transition-colors nav-link">Contacto</a>
+                </div>
+
+                <div class="flex flex-col gap-4 text-center md:text-right">
+                    <a href="https://www.instagram.com/oliver.vc2309/" target="_blank" rel="noreferrer" class="text-gray-400 hover:text-red-brand transition-colors text-sm">Instagram</a>
+                    <a href="https://www.behance.net/cinthyavasquez2" target="_blank" rel="noreferrer" class="text-gray-400 hover:text-red-brand transition-colors text-sm">Behance</a>
+                    <a href="https://www.linkedin.com/in/cinthya-vc-10474b281/" target="_blank" rel="noreferrer" class="text-gray-400 hover:text-red-brand transition-colors text-sm">LinkedIn</a>
+                    <a href="https://wa.me/51917998121" target="_blank" rel="noreferrer" class="text-gray-400 hover:text-red-brand transition-colors text-sm">WhatsApp</a>
+                </div>
+
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600 uppercase tracking-widest">
+                <p>© 2026 Cinthya Vasquez. Diseño Gráfico & Marketing Digital</p>
+                <p class="font-serif italic capitalize text-gray-400">Creatividad · Estrategia · Diseño</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGICA JAVASCRIPT -->
+    <script>
+        // Iniciar Iconos Lucide
+        lucide.createIcons();
+
+        // Lógica Header Sticky
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.remove('bg-transparent', 'py-6');
+                header.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-sm', 'py-4');
+            } else {
+                header.classList.add('bg-transparent', 'py-6');
+                header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-sm', 'py-4');
+            }
+        });
+
+        // Lógica Menú Móvil
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            const isOpen = !mobileMenu.classList.contains('opacity-0');
+            if (isOpen) {
+                mobileMenu.classList.add('opacity-0', 'invisible', 'scale-y-0');
+                mobileMenu.classList.remove('opacity-100', 'visible', 'scale-y-100');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            } else {
+                mobileMenu.classList.remove('opacity-0', 'invisible', 'scale-y-0');
+                mobileMenu.classList.add('opacity-100', 'visible', 'scale-y-100');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // Lógica Smooth Scroll para anclas
+        document.querySelectorAll('.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const element = document.querySelector(targetId);
+                if (element) {
+                    const offset = 80;
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = element.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Lógica Reveal on Scroll (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Lógica Animación Barras de Software (Intersection Observer)
+        const skillBars = document.querySelectorAll('.skill-bar');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    bar.style.width = bar.getAttribute('data-percent') + '%';
+                    skillObserver.unobserve(bar); // Solo animar una vez
+                }
+            });
+        }, { threshold: 0.3 });
+
+        skillBars.forEach(bar => skillObserver.observe(bar));
+
+        // Lógica del Formulario y Google Sheets
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitBtnText = submitBtn.querySelector('span');
+        const errorMsg = document.getElementById('errorMsg');
+        
+        // ⚠️ La URL del Apps Script que configuramos
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzOqlWSBNQzXpRRNddFMDwcD4iqvOGRPkhxiwRMggLD_-YjmxtgFr2EAXz9i0PgM7IK/exec';
+        const PHONE_NUMBER = '51917998121';
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const contact = document.getElementById('contact').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+
+            if (!name || !contact || !service || !message) {
+                errorMsg.textContent = 'Por favor, completa todos los campos para continuar.';
+                return;
+            }
+            
+            errorMsg.textContent = '';
+            submitBtnText.innerHTML = 'PROCESANDO...';
+            submitBtn.style.pointerEvents = 'none';
+
+            const formData = { name, contact, service, message };
+
+            try {
+                // Envía los datos a Google Sheets de fondo
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Evita errores de seguridad CORS
+                    body: JSON.stringify(formData)
+                });
+            } catch (err) {
+                console.error("No se pudo guardar el registro en Google Sheets:", err);
+            } finally {
+                // Restaura el botón
+                submitBtnText.innerHTML = 'ENVIAR PROYECTO';
+                submitBtn.style.pointerEvents = 'auto';
+                
+                // Abre WhatsApp
+                const wspMessage = `Hola Cinthya 👋\n\nMi nombre es: ${name}\nMi contacto es: ${contact}\nEstoy interesado/a en: ${service}\n\nSobre mi proyecto:\n${message}\n\nMe gustaría recibir más información.`;
+                const encodedMessage = encodeURIComponent(wspMessage);
+                window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodedMessage}`, '_blank');
+                
+                // Limpia el formulario
+                form.reset();
+            }
+        });
+
+    </script>
+</body>
+</html>
